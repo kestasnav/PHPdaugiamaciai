@@ -59,7 +59,7 @@ if (isset($_POST['data'])){
  
 } 
 
-if ($row == $col || $col == $istrizaine1 || $col == $istrizaine2 || $row == $istrizaine1 || $row == $istrizaine2 || $istrizaine1 == $istrizaine2) {
+if ($row == $col && $col == $istrizaine1 && $col == $istrizaine2 && $row == $istrizaine1 && $row == $istrizaine2 && $istrizaine1 && $istrizaine2) {
     echo "Kvadratas yra magiškas";
 } else {
  echo "Kvadratas nėra magiškas";
