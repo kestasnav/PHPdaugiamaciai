@@ -37,8 +37,9 @@ if (isset($_POST['data'])){
         $data[]=explode(" ",$t);
     }
 
-    $n = count($data);
-
+    
+    function magic($data){
+        $n = count($data);
     $istrizaine1 = 0;
     $istrizaine2 = 0;
     
@@ -46,8 +47,7 @@ if (isset($_POST['data'])){
         $istrizaine1 += $data[$i][$i];
         $istrizaine2 += $data[$i][sizeof($data)-$i-1];
     }  
-    if( $istrizaine1 != $istrizaine2) {  return false;  }
-
+    
     for ($k=0; $k<$n; $k++)  {
         $row = 0;
         $col = 0; 
@@ -56,14 +56,21 @@ if (isset($_POST['data'])){
         $row += (int)$data[$k][$j];
         $col += (int)$data[$j][$k];       
     }
- 
+    if ($row == $col && $col == $istrizaine1 && $col == $istrizaine2 && $row == $istrizaine1 && $row == $istrizaine2 && $istrizaine1 && $istrizaine2) {
+        return true;
+    } else {
+     return false;
+    }
 } 
-
-if ($row == $col && $col == $istrizaine1 && $col == $istrizaine2 && $row == $istrizaine1 && $row == $istrizaine2 && $istrizaine1 && $istrizaine2) {
+    }
+if(magic($data)){
     echo "Kvadratas yra magiškas";
-} else {
- echo "Kvadratas nėra magiškas";
 }
+else{
+    echo "Kvadratas nėra magiškas";
+}
+    
+
   
 ?>
 
