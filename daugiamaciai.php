@@ -56,7 +56,7 @@ if (isset($_POST['data'])){
         $row += (int)$data[$k][$j];
         $col += (int)$data[$j][$k];       
     }
-    if ($row == $col && $col == $istrizaine1 && $col == $istrizaine2 && $row == $istrizaine1 && $row == $istrizaine2 && $istrizaine1 && $istrizaine2) {
+    if ($row == $col && $col == $istrizaine1 && $col == $istrizaine2 && $row == $istrizaine1 && $row == $istrizaine2 && $istrizaine1 == $istrizaine2) {
         return true;
     } else {
      return false;
