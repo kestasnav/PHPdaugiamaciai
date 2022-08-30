@@ -94,6 +94,7 @@
         <hr>
         <?php  $trikampis = '';
                 $answer = null;
+               
          ?>
         <div class="row mt-5">
             <div class="col-md-6">
@@ -116,9 +117,11 @@
                             $c = $_POST['c'];
                             $p = ($a + $b + $c) / 2;
                            $trikampis = sqrt($p*($p-$a)*($p-$b)*($p-$c));   
-                           if (($a + $b > $c) && ($a + $b > $c) && ($a + $b > $c)) {
+                           if (($a + $b > $c) && ($a + $c > $b) && ($b + $c > $a)) {
                              $answer = 1;
-                        }                      
+                        } else {
+                            $answer = 2;
+                        }                     
                         }
                         ?>
                         </form>
@@ -139,7 +142,7 @@
                                             echo "Trikampio plotas: ";
                                             echo "<br>";
                                             echo round($trikampis, 2);
-                                        } else {
+                                        } else if($answer === 2) {
                                           echo "Negalima sudaryti trikampio!";
                                         }
                                         ?></td>
@@ -190,8 +193,11 @@
                                         </th>
 
                                         <?php
-                        $d = $_GET['d'];
-                        $order = $_GET['orderBy'];
+                      if (isset( $_GET['d'],
+                      $_GET['orderBy'])) {
+                         $d = $_GET['d'];
+                         $order = $_GET['orderBy'];
+                      
                         usort($skelbimai, function ($a, $b) use ($order) {
                             global $d;
                             if ($d == 'DESC') {
@@ -201,7 +207,7 @@
                             } 
                             
                         });
-
+                    }
                         ?>
                                     
                                 </tr>
