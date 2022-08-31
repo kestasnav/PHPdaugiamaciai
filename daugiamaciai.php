@@ -163,52 +163,74 @@
                     <div class="card-body">
                         <?php include "skelbimai.php"; ?>
                         <?php
-                        $d = '';
-                      if (isset( $_GET['d'],
-                      $_GET['orderBy'])) {
-                         $d = $_GET['d'];
-                         $order = $_GET['orderBy'];
-                      
-                        usort($skelbimai, function ($a, $b) use ($order) {
-                            global $d;
-                            if ($d == 'DESC') {
-                                return $b[$order] <=> $a[$order];
-                            } else if ($d == 'ASC') {
-                                return $a[$order] <=> $b[$order];
-                            } 
-                            
-                        });
-                    }
-                        ?>
+                    $d = '';
+                    $orderBy='';
+                    if (isset($_GET['d']) && isset($_GET['orderBy'])){
+                        $d = $_GET['d'];
+                        $orderBy=$_GET['orderBy'];
+                    }                  
+
+                    ?>
+                 
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>
+                                    <?php if ($orderBy=='id'){ ?>
                                         <?php if ($d == "ASC") { ?>
-                                            <a href="daugiamaciai.php?orderBy=id&d=DESC"> Skelbimo ID &uparrow;</a>
+                                            <a href="daugiamaciai.php?orderBy=id&d=DESC"> ID &uparrow;</a>
                                         <?php } else { ?>
-                                            <a href="daugiamaciai.php?orderBy=id&d=ASC"> Skelbimo ID &downarrow;</a>
+                                            <a href="daugiamaciai.php?orderBy=id&d=ASC"> ID &downarrow;</a>
                                         <?php } ?>
+                                    <?php }else{ ?>
+                                        <a href="daugiamaciai.php?orderBy=id&d=ASC"> ID </a>
+                                    <?php } ?>
                                     </th>
-                                    <th><?php if ($d == "ASC") { ?>
-                                            <a href="daugiamaciai.php?orderBy=text&d=DESC"> Skelbimas &uparrow;</a>
+                                    <th>
+                                    <?php if ($orderBy=='text'){ ?>
+                                        <?php if ($d == "ASC") { ?>
+                                            <a href="daugiamaciai.php?orderBy=text&d=DESC"> Pavadinimas &uparrow;</a>
                                         <?php } else { ?>
-                                            <a href="daugiamaciai.php?orderBy=text&d=ASC"> Skelbimas &downarrow;</a>
+                                            <a href="daugiamaciai.php?orderBy=text&d=ASC"> Pavadinimas &downarrow;</a>
                                         <?php } ?>
+                                    <?php }else{ ?>
+                                        <a href="daugiamaciai.php?orderBy=text&d=ASC"> Pavadinimas </a>
+                                    <?php } ?>
                                     </th>
-                                    <th><?php if ($d == "ASC") { ?>
+                                    <th>
+                                        <?php if ($orderBy=='cost') { ?>                                        
+                                    <?php if ($d == "ASC") { ?>
                                             <a href="daugiamaciai.php?orderBy=cost&d=DESC"> Kaina &uparrow;</a>
                                         <?php } else { ?>
                                             <a href="daugiamaciai.php?orderBy=cost&d=ASC"> Kaina &downarrow;</a>
-                                        <?php } ?>
+                                            <?php } ?>
+                                    <?php }else{ ?>
+                                        <a href="daugiamaciai.php?orderBy=cost&d=ASC"> Kaina </a>
+                                    <?php } ?>
                                     </th>
-                                    <th><?php if ($d == "ASC") { ?>
+                                    <th>
+                                    <?php if ($orderBy=='onPay') { ?>  
+                                    <?php if ($d == "ASC") { ?>
                                             <a href="daugiamaciai.php?orderBy=onPay&d=DESC"> Apmokėjimo data &uparrow;</a>
                                         <?php } else { ?>
                                             <a href="daugiamaciai.php?orderBy=onPay&d=ASC"> Apmokėjimo data &downarrow;</a>
-                                        <?php } ?>
+                                            <?php } ?>
+                                    <?php }else{ ?>
+                                        <a href="daugiamaciai.php?orderBy=onPay&d=ASC"> Apmokėjimo data </a>
+                                    <?php } ?>
                                         </th>
+                                        <?php
 
+                             
+usort($skelbimai, function ($a, $b) use ($orderBy) {
+    global $d;
+    if ($d == 'DESC') {
+        return $b[$orderBy] <=> $a[$orderBy];
+    } else if ($d == 'ASC') {
+        return $a[$orderBy] <=> $b[$orderBy];
+    }
+});
+?>
                              
                                     
                                 </tr>
