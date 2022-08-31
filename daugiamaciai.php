@@ -162,7 +162,24 @@
                     <div class="card-header">Skelbimų sąrašas</div>
                     <div class="card-body">
                         <?php include "skelbimai.php"; ?>
-                        <?php $d = $_GET['d']; ?>
+                        <?php
+                        $d = '';
+                      if (isset( $_GET['d'],
+                      $_GET['orderBy'])) {
+                         $d = $_GET['d'];
+                         $order = $_GET['orderBy'];
+                      
+                        usort($skelbimai, function ($a, $b) use ($order) {
+                            global $d;
+                            if ($d == 'DESC') {
+                                return $b[$order] <=> $a[$order];
+                            } else if ($d == 'ASC') {
+                                return $a[$order] <=> $b[$order];
+                            } 
+                            
+                        });
+                    }
+                        ?>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -192,23 +209,7 @@
                                         <?php } ?>
                                         </th>
 
-                                        <?php
-                      if (isset( $_GET['d'],
-                      $_GET['orderBy'])) {
-                         $d = $_GET['d'];
-                         $order = $_GET['orderBy'];
-                      
-                        usort($skelbimai, function ($a, $b) use ($order) {
-                            global $d;
-                            if ($d == 'DESC') {
-                                return $b[$order] <=> $a[$order];
-                            } else if ($d == 'ASC') {
-                                return $a[$order] <=> $b[$order];
-                            } 
-                            
-                        });
-                    }
-                        ?>
+                             
                                     
                                 </tr>
                             </thead>
